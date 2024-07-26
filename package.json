@@ -1,7 +1,18 @@
 {
   "name": "substrate-nextjs-tailwind-starter",
   "version": "0.1.0",
-  "private": true,
+  "author": "Calvin Sze",
+  "license": "MIT",
+  "private": false,
+  "description": "A substrate frontend starter template for Next.js with Tailwind CSS integration",
+  "keywords": [
+    "nextjs",
+    "tailwindcss",
+    "starter",
+    "substrate",
+    "polkadot",
+    "polkadotjs"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
