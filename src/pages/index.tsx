@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { usePolkadot } from '../context/PolkadotContext';
 
 const Home: React.FC = () => {
-  const { api, isApiReady } = usePolkadot();
+  const { api, isApiReady, accounts } = usePolkadot();
   const [blockNumber, setBlockNumber] = useState<number | null>(null);
   const [chainName, setChainName] = useState<string | null>(null);
 
@@ -25,6 +25,24 @@ const Home: React.FC = () => {
       <h1>Substrate Chain Info</h1>
       <p>Chain Name: {chainName}</p>
       <p>Latest Block Number: {blockNumber}</p>
+
+      {/* <div>
+      <h1>Polkadot Wallet Info</h1>
+      {isApiReady ? (
+        <div>
+          <h2>Accounts:</h2>
+          <ul>
+            {accounts?.map((account) => (
+              <li key={account.address}>
+                {account.meta.name}: {account.address}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div> */}
     </div>
   );
 };
