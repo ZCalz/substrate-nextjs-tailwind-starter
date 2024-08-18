@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 require('dotenv').config();
 
-const WS_PROVIDER_URL = process.env.RPC_ENPOINT || 'ws://localhost:9944';
+const WS_PROVIDER_URL = process.env.RPC_ENPOINT || 'wss://westend-rpc.polkadot.io';
 import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 
 interface PolkadotContextType {
@@ -40,26 +40,24 @@ export const PolkadotProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         api.disconnect();
       }
     };
-  }, [api]);
+  }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const enablePolkadotExtension = async () => {
-        const extensionDapp = await import('@polkadot/extension-dapp');
-        const { web3Accounts, web3Enable } = extensionDapp;
+    const enablePolkadotExtension = async () => {
+      const extensionDapp = await import('@polkadot/extension-dapp');
+      const { web3Accounts, web3Enable } = extensionDapp;
 
-        const extensions = await web3Enable('Substrate Dapp Template');
-        if (extensions.length === 0) {
-          console.log('No Polkadot extension found');
-          return;
-        }
-        const accounts = await web3Accounts();
-        console.log(accounts);
-        setAccounts(accounts);
-      };
-      if (window) {
-          enablePolkadotExtension();
+      const extensions = await web3Enable('Substrate Dapp Template');
+      if (extensions.length === 0) {
+        console.log('No Polkadot extension found');
+        return;
       }
+      const accounts = await web3Accounts();
+      console.log(accounts);
+      setAccounts(accounts);
+    };
+    if (window) {
+        enablePolkadotExtension();
     }
   }, []);
 

@@ -21,28 +21,28 @@ const Home: React.FC = () => {
   }, [api, isApiReady]);
 
   return (
-    <div>
+    <div className="flex flex-col items-center h-screen justify-center">
       <h1>Substrate Chain Info</h1>
       <p>Chain Name: {chainName}</p>
       <p>Latest Block Number: {blockNumber}</p>
 
-      {/* <div>
-      <h1>Polkadot Wallet Info</h1>
-      {isApiReady ? (
-        <div>
-          <h2>Accounts:</h2>
-          <ul>
-            {accounts?.map((account) => (
-              <li key={account.address}>
-                {account.meta.name}: {account.address}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div> */}
+      <div className="flex flex-col py-4 items-center">
+        <h1>Polkadot Wallet Info</h1>
+        {isApiReady ? (
+          <div>
+            <h2>Accounts:</h2>
+            <ul>
+              {accounts?.map((account) => (
+                <li key={account.address}>
+                  {account.meta.name}: {account.address}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
     </div>
   );
 };
